@@ -1,17 +1,48 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Coby Cho — Personal Site</title>
     <meta name="description" content="Coby Cho — coder, writer, builder." />
+
+    <!-- 0) Force dark by default (respect an explicit light choice) BEFORE paint -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+            if (!('theme' in localStorage)) localStorage.theme = 'dark';
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <!-- Mobile browser UI colors -->
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+    <!-- Tailwind (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = { theme: { extend: { fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif" ] } } } };
+      tailwind.config = {
+        theme: { extend: {
+          fontFamily: {
+            sans: ["Inter","ui-sans-serif","system-ui","-apple-system","Segoe UI","Roboto","Helvetica Neue","Arial","Noto Sans","sans-serif"],
+          }
+        }}
+      };
     </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
       :root { color-scheme: light dark; }
       .prose a { text-decoration: underline; text-underline-offset: 2px; }
@@ -32,17 +63,21 @@
       </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Main -->
     <main class="max-w-3xl mx-auto px-4 sm:px-6">
+      <!-- Hero -->
       <section class="py-12 sm:py-16">
         <h1 class="font-display leading-[1.05] tracking-tight text-4xl sm:text-5xl lg:text-6xl">
-  <span class="uppercase font-bold text-slate-200">Hey, I’m</span>
-  <span class="font-bold text-amber-500"> Coby<span class="align-[-0.1em]">!</span></span>
-</h1>
-<hr class="mt-3 mb-6 h-1 w-full bg-amber-600 border-0">
-        <p class="mt-5 text-xl sm:text-2xl leading-snug text-slate-300 max-w-2xl">I like to code, write, and build things. Instead of a long spiel, here’s a quick snapshot of what I’m learning and what I’ve made lately.</p>
+          <span class="uppercase font-bold text-slate-200">Hey, I’m</span>
+          <span class="font-bold text-amber-500"> Coby<span class="align-[-0.1em]">!</span></span>
+        </h1>
+        <hr class="mt-3 mb-6 h-1 w-full bg-amber-600 border-0" />
+        <p class="mt-5 text-xl sm:text-2xl leading-snug text-slate-300 max-w-2xl">
+          I like to code, write, and build things. Instead of a long spiel, here’s a quick snapshot
+          of what I’m learning and what I’ve made lately.
+        </p>
 
-        <!-- Two-up cards like Sid's lists -->
+        <!-- Two-up cards -->
         <div class="mt-8 grid sm:grid-cols-2 gap-6">
           <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40">
             <h2 class="font-semibold">Curious about</h2>
@@ -87,25 +122,21 @@
       <section id="writing" class="py-8 border-t border-slate-200 dark:border-slate-800">
         <h2 class="text-2xl font-bold">Writing</h2>
         <ul class="mt-4 space-y-3">
-          
           <li class="flex items-start gap-3">
             <time class="text-xs text-slate-500 mt-1">2025-06-18</time>
             <div>
               <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500 font-medium" href="security-writeup.html">What makes a good security write-up?</a>
-              <p class="text-sm text-slate-600 dark:text-slate-400">Notes from coursework: TLS handshakes, HSTS pitfalls, and readable diagrams.</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400">Notes: SRM, Defense-in-Depth, Zero Trust, Encryption/Hashing, GRC.</p>
             </div>
           </li>
         </ul>
-        <a class="inline-block mt-4 text-sm underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="#">View all posts →</a>
+        <a class="inline-block mt-4 text-sm underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="#writing">View all posts →</a>
       </section>
 
-      <!-- Projects -->
-      
-
-      <!-- Now / Dailies style -->
+      <!-- Now -->
       <section id="now" class="py-8 border-t border-slate-200 dark:border-slate-800">
         <h2 class="text-2xl font-bold">Now</h2>
-        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Oct 2, 2025 — publishing v2 of my personal website. day 1 of building "vision", a new application centered around geo mapping in the Houston area.</p>
+        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Oct 2, 2025 — finishing an exam prep pack, polishing Unity menu art, and shipping this website.</p>
         <a class="inline-block mt-3 text-sm underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="#">View all dailies →</a>
       </section>
 
@@ -116,16 +147,16 @@
           Email
           <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="mailto:cobycho7@gmail.com">cobycho7@gmail.com</a>
           • GitHub
-          <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="https://github.com/CobyCho" target="_blank" rel="noopener">@cobycho</a>
+          <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="https://github.com/CobyCho" target="_blank" rel="noopener">@CobyCho</a>
           • LinkedIn
           <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" target="_blank" rel="noopener" href="https://www.linkedin.com/in/coby-cho-b365bb20a/">profile</a>
         </p>
         <ul class="mt-4 list-disc list-inside text-sm text-slate-700 dark:text-slate-300">
-          <li>Cloud + AI</li>
+          <li>Short blurb: CS + security + sports analytics. I like building fast, minimal tools.</li>
           <li>
             <a class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500" href="assets/resume/Resume 25-26 .pdf" target="_blank" rel="noopener">Resume (PDF)</a>
           </li>
-          <li>Open to full-time roles, internships, and project collabs.</li>
+          <li>Open to internships and project collabs.</li>
         </ul>
       </section>
 
@@ -136,13 +167,10 @@
 
     <button id="themeToggle" title="Toggle theme" class="fixed bottom-5 right-5 text-xs px-2.5 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 backdrop-blur">Toggle theme</button>
 
+    <!-- 3) Simple toggle + year (no prefers-color-scheme check needed) -->
     <script>
       document.getElementById('y').textContent = new Date().getFullYear();
       const btn = document.getElementById('themeToggle');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      }
       btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.theme = isDark ? 'dark' : 'light';

@@ -1,27 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>What makes a good security write‑up? — Coby Cho</title>
+    <title>What makes a good security write-up? — Coby Cho</title>
     <meta name="description" content="Notes on security fundamentals: Shared Responsibility Model, Defense in Depth, Zero Trust, Encryption & Hashing, and GRC." />
+
+    <!-- Dark by default (respect saved light) -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+            if (!('theme' in localStorage)) localStorage.theme = 'dark';
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <!-- Mobile UI colors -->
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = { theme: { extend: { fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif" ], display: ["Libre Baskerville", "serif"] } } } };
+      tailwind.config = {
+        theme: { extend: {
+          fontFamily: {
+            sans: ["Inter","ui-sans-serif","system-ui","-apple-system","Segoe UI","Roboto","Helvetica Neue","Arial","Noto Sans","sans-serif"],
+          }
+        }}
+      };
     </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
       :root { color-scheme: light dark; }
       .prose a { text-decoration: underline; text-underline-offset: 2px; }
+      .font-display { font-family: 'Libre Baskerville', serif; }
     </style>
   </head>
   <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 selection:bg-amber-300/60 selection:text-black">
     <!-- Top Nav -->
     <header class="sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-200/60 dark:border-slate-800 z-50">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-        <a href="/" class="font-extrabold tracking-tight text-lg">COBY</a>
+        <a href="/index.html" class="font-extrabold tracking-tight text-lg">COBY</a>
         <nav class="text-sm space-x-5">
           <a href="/index.html#writing" class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500">Writing</a>
           <a href="https://github.com/CobyCho" target="_blank" rel="noopener" class="underline underline-offset-4 decoration-slate-400 hover:decoration-slate-700 dark:decoration-slate-500">Projects</a>
@@ -35,20 +67,19 @@
       <article class="py-10">
         <header>
           <p class="text-xs text-slate-500">Updated Oct 2, 2025</p>
-          <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold leading-tight">What makes a good security write‑up?</h1>
+          <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold leading-tight">What makes a good security write-up?</h1>
           <hr class="mt-4 mb-8 h-1 w-full bg-amber-600 border-0" />
           <p class="text-slate-500 text-sm">Quick, readable notes you can reference during reviews or interviews.</p>
         </header>
 
         <section class="mt-8 space-y-8">
-          <!-- Shared Responsibility Model -->
           <section>
             <h2 class="text-xl sm:text-2xl font-semibold">Shared Responsibility Model (SRM)</h2>
             <ul class="mt-3 list-disc list-inside text-slate-300 space-y-2">
-              <li>Defines which security tasks are handled by the <em>cloud provider</em> vs the <em>customer</em>; varies by hosting model: SaaS, PaaS, IaaS, on‑prem.</li>
+              <li>Defines which security tasks are handled by the <em>cloud provider</em> vs the <em>customer</em>; varies by hosting model: SaaS, PaaS, IaaS, on-prem.</li>
               <li>Moving to the cloud shifts some responsibilities to the provider; others stay with the customer.</li>
               <li><strong>Always the customer’s responsibility:</strong> information/data, devices (mobile/PC), accounts & identities.</li>
-              <li><strong>On‑prem datacenter:</strong> customer handles everything from physical security to data encryption.</li>
+              <li><strong>On-prem datacenter:</strong> customer handles everything from physical security to data encryption.</li>
               <li><strong>IaaS:</strong> most customer management. Provider offers infrastructure; customer handles OS, network controls, apps, and data protection.</li>
               <li><strong>PaaS:</strong> provider manages hardware/OS; customer focuses on applications and data.</li>
               <li><strong>SaaS:</strong> least customer management. Provider manages almost everything except data, devices, accounts, and identities.</li>
@@ -56,7 +87,6 @@
             </ul>
           </section>
 
-          <!-- Defense in Depth -->
           <section>
             <h2 class="text-xl sm:text-2xl font-semibold">Defense in Depth (DiD)</h2>
             <ul class="mt-3 list-disc list-inside text-slate-300 space-y-2">
@@ -72,28 +102,25 @@
             </ul>
           </section>
 
-          <!-- Zero Trust -->
           <section>
             <h2 class="text-xl sm:text-2xl font-semibold">Zero Trust Model</h2>
             <ul class="mt-3 list-disc list-inside text-slate-300 space-y-2">
               <li>Assumes a hostile network by default — <em>trust no one, verify everything</em>.</li>
-              <li><strong>Principles:</strong> verify explicitly; least‑privilege access (JIT, JEA, data protection); assume breach (segment by network/user/device/app; prefer encryption).</li>
+              <li><strong>Principles:</strong> verify explicitly; least-privilege access (JIT/JEA, data protection); assume breach (segment by network/user/device/app; prefer encryption).</li>
               <li><strong>Pillars:</strong> identities, devices, applications, data, infrastructure, networks.</li>
             </ul>
           </section>
 
-          <!-- Encryption & Hashing -->
           <section>
             <h2 class="text-xl sm:text-2xl font-semibold">Encryption & Hashing</h2>
             <ul class="mt-3 list-disc list-inside text-slate-300 space-y-2">
               <li><strong>Encryption</strong> — makes data unreadable to unauthorized viewers; requires a key to decrypt.</li>
               <li>Types: <strong>symmetric</strong> (same key for enc/dec) and <strong>asymmetric</strong> (public/private pair). Asymmetric is common for HTTPS and digital signatures.</li>
               <li>States of data: <strong>at rest</strong> (storage), <strong>in transit</strong> (across networks), <strong>in use</strong> (memory/CPU).</li>
-              <li><strong>Hashing</strong> — one‑way transformation to a fixed‑length value; no keys, not reversible; often used for password storage.</li>
+              <li><strong>Hashing</strong> — one-way transformation to a fixed-length value; no keys, not reversible; often used for password storage.</li>
             </ul>
           </section>
 
-          <!-- GRC -->
           <section>
             <h2 class="text-xl sm:text-2xl font-semibold">GRC (Governance, Risk, Compliance)</h2>
             <ul class="mt-3 list-disc list-inside text-slate-300 space-y-2">
@@ -117,10 +144,6 @@
     <script>
       document.getElementById('y').textContent = new Date().getFullYear();
       const btn = document.getElementById('themeToggle');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      }
       btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.theme = isDark ? 'dark' : 'light';
