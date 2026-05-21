@@ -563,6 +563,16 @@
       font-size: 1.5rem;
     }
 
+    .project-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .project-card h3 {
       color: var(--white);
       font-size: 1.22rem;
@@ -830,7 +840,7 @@
         <a href="#projects"><span>03.</span>Projects</a>
         <a href="#writing"><span>04.</span>Writing</a>
         <a href="#contact"><span>05.</span>Contact</a>
-        <a class="resume-pill" href="Resume%202026-27.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <a class="resume-pill" href="resume.pdf" target="_blank" rel="noreferrer">Resume</a>
       </nav>
     </div>
   </header>
@@ -951,21 +961,31 @@
       </div>
       <div class="projects-grid">
         <a class="project-card" href="https://github.com/CobyCho" target="_blank" rel="noreferrer">
-          <div class="project-icon">▧</div>
+          <div class="project-icon" aria-hidden="true">🏀</div>
           <h3>NBA Stats Analyzer</h3>
           <p>A C++/Python project for exploring basketball stats, player comparisons, and sports analytics workflows.</p>
           <div class="tags"><span>C++</span><span>Python</span><span>Analytics</span></div>
         </a>
 
         <a class="project-card" href="https://github.com/CobyCho" target="_blank" rel="noreferrer">
-          <div class="project-icon">⌖</div>
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s6-5.33 6-11a6 6 0 1 0-12 0c0 5.67 6 11 6 11z"></path>
+              <circle cx="12" cy="10" r="2.2"></circle>
+            </svg>
+          </div>
           <h3>Explore Houston</h3>
           <p>A location-focused project around Houston places, mapping ideas, and city exploration.</p>
           <div class="tags"><span>Web</span><span>Maps</span><span>Houston</span></div>
         </a>
 
         <a class="project-card" href="https://github.com/CobyCho" target="_blank" rel="noreferrer">
-          <div class="project-icon">◇</div>
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3l7 3v5c0 4.7-2.8 8.2-7 10-4.2-1.8-7-5.3-7-10V6l7-3z"></path>
+              <path d="M9 12l2 2 4-5"></path>
+            </svg>
+          </div>
           <h3>Phishing Email Detector</h3>
           <p>A security project using feature extraction and model experiments to classify phishing-style emails.</p>
           <div class="tags"><span>Python</span><span>ML</span><span>Security</span></div>
