@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Coby Cho — portfolio, projects, writing, and work in automation, data, cloud, security, and AI." />
+  <meta name="description" content="Coby Cho — portfolio, projects, music, and work in automation, data, cloud, security, and AI." />
   <title>Coby Cho | Portfolio</title>
   <style>
     :root {
@@ -440,7 +440,7 @@
     .skill-card,
     .experience-card,
     .project-card,
-    .writing-card,
+    .music-card,
     .contact-card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -488,7 +488,7 @@
 
     .experience-card:hover,
     .project-card:hover,
-    .writing-card:hover {
+    .music-card:hover {
       transform: translateY(-7px);
       border-color: rgba(95, 255, 210, 0.36);
       background: var(--card-strong);
@@ -595,28 +595,76 @@
       font-size: 0.72rem;
     }
 
-    .writing-card {
-      display: block;
-      padding: 28px;
+    .music-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(320px, 1.25fr);
+      gap: 30px;
+      align-items: center;
+      padding: 30px;
+      overflow: hidden;
       transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
     }
 
-    .writing-date {
-      color: var(--faint);
+    .music-copy {
+      padding: 8px;
+    }
+
+    .music-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: #1ed760;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      margin-bottom: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .writing-card h3 {
+    .music-label::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #1ed760;
+      box-shadow: 0 0 18px rgba(30, 215, 96, 0.65);
+    }
+
+    .music-card h3 {
       color: var(--white);
-      font-size: 1.45rem;
-      margin-bottom: 10px;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      margin-bottom: 14px;
     }
 
-    .writing-card p {
-      max-width: 780px;
+    .music-card p {
       color: var(--muted);
+    }
+
+    .playlist-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .playlist-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .spotify-frame {
+      width: 100%;
+      min-height: 352px;
+      border: 0;
+      border-radius: 18px;
+      background: #121212;
     }
 
     .contact-card {
@@ -722,6 +770,10 @@
       }
 
       .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .music-card {
         grid-template-columns: 1fr;
       }
 
@@ -838,7 +890,7 @@
         <a href="#about"><span>01.</span>About</a>
         <a href="#experience"><span>02.</span>Experience</a>
         <a href="#projects"><span>03.</span>Projects</a>
-        <a href="#writing"><span>04.</span>Writing</a>
+        <a href="#music"><span>04.</span>Music</a>
         <a href="#contact"><span>05.</span>Contact</a>
         <a class="resume-pill" href="https://cobycho.github.io/Resume%202026-27.pdf" target="_blank" rel="noreferrer">Resume</a>
       </nav>
@@ -993,17 +1045,32 @@
       </div>
     </section>
 
-    <section class="container section reveal" id="writing">
+    <section class="container section reveal" id="music">
       <div class="section-heading">
         <span class="number">04.</span>
-        <h2>Writing</h2>
+        <h2>Currently in Rotation</h2>
         <span class="line"></span>
       </div>
-      <a class="writing-card" href="#">
-        <p class="writing-date">2025-06-18</p>
-        <h3>What makes a good security write-up?</h3>
-        <p>Notes on SRM, Defense-in-Depth, Zero Trust, Encryption, Hashing, and GRC.</p>
-      </a>
+      <div class="music-card">
+        <div class="music-copy">
+          <span class="music-label">Coby's playlist</span>
+          <h3>A little soundtrack for the scroll.</h3>
+          <p>
+            A rotating mix of what I have been listening to lately. Hit play, shuffle it,
+            and stay awhile.
+          </p>
+          <a class="playlist-link" href="https://open.spotify.com/playlist/0lAgejNHzhl7h476Afe8Ef" target="_blank" rel="noreferrer">
+            Open in Spotify →
+          </a>
+        </div>
+        <iframe
+          class="spotify-frame"
+          title="Coby's Spotify playlist"
+          src="https://open.spotify.com/embed/playlist/0lAgejNHzhl7h476Afe8Ef?utm_source=generator&theme=0"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        ></iframe>
+      </div>
     </section>
 
     <section class="container section reveal" id="contact">
